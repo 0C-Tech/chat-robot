@@ -5,8 +5,12 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:compress": "gulp compress",
+    "build:prod": "npm run build && npm run build:compress",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "lint": "eslint \"{src,test}/**/*.{ts,html}\" --fix",
+    "test": "ng test",
+    "deploy": "sh ./scripts/deploy.sh"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +32,8 @@
     "@angular/cli": "~15.2.5",
     "@angular/compiler-cli": "^15.2.5",
     "@types/jasmine": "~4.3.1",
+    "gulp": "^4.0.2",
+    "gulp-gzip": "^1.4.2",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.1",
     "karma-chrome-launcher": "~3.1.1",
