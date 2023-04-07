@@ -10,10 +10,10 @@ import { ChatGPTResponse } from './robot.interface';
 export class RobotService {
   constructor(private apiService: ApiService) {}
 
-  getMessage(prompt: string): Observable<ChatGPTResponse> {
+  sendMessage(message: string): Observable<ChatGPTResponse> {
     return this.apiService
-      .httpGet(this.apiService.getApiUrl(ApiUrl.GET_MESSAGE), {
-        prompt
+      .httpPost(this.apiService.getApiUrl(ApiUrl.GET_MESSAGE), {
+        message
       })
       .pipe(map((res) => res?.data || {}));
   }

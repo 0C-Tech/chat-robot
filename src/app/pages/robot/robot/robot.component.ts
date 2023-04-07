@@ -51,7 +51,7 @@ export class RobotComponent implements OnInit, AfterViewInit {
     this.prompt = '';
     this.scrollBottom();
 
-    this.robotService.getMessage(prompt).subscribe((res) => {
+    this.robotService.sendMessage(prompt).subscribe((res) => {
       res.choices.forEach((msg) => {
         this.messages.push({
           isRobot: true,
