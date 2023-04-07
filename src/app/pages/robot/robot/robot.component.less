@@ -1,0 +1,115 @@
+@body-width: 1000px;
+@dialog-height: 575px;
+@msg-input-height: 95px;
+
+.robot-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: @dialog-height;
+  background: url("https://img.alicdn.com/tfs/TB1AgLTdmf2gK0jSZFPXXXsopXa-3840-1920.jpg") center center/cover no-repeat fixed;
+}
+
+.robot {
+  width: @body-width;
+  background: #fff;
+  box-shadow: 0 0 10px 0 rgba(171, 171, 171, 0.50);
+
+  .robot-message {
+    height: @dialog-height - @msg-input-height - 2;
+    width: 100%;
+    padding: 32px 16px 16px;
+    background: #f1f1f5;
+    overflow: auto;
+
+    .robot-message-item {
+      + .robot-message-item {
+        margin-top: 24px;
+      }
+
+      .robot-message-content {
+        max-width: 520px;
+        min-height: 36px;
+        min-width: 36px;
+        line-height: 20px;
+        padding: 8px 15px;
+        border-radius: 18px;
+        display: inline-block;
+        text-align: left;
+      }
+    }
+
+    .robot-message-item-robot {
+      .robot-message-content {
+        background: #fff;
+      }
+
+      .robot-message-content:first-child {
+        border-bottom-left-radius: 2px;
+      }
+    }
+
+    .robot-message-item-user {
+      text-align: right;
+
+      .robot-message-content {
+        background: #1890ff;
+        color: #fff;
+
+        pre {
+          white-space: pre-wrap;
+        }
+      }
+
+      .robot-message-content:first-child {
+        border-bottom-right-radius: 2px;
+      }
+    }
+  }
+
+  .robot-prompt {
+    height: @msg-input-height;
+    border-top: 1px solid #e4e4e4;
+
+    textarea {
+      height: 100%;
+      width: @body-width - 100;
+      border: none;
+      resize: none;
+      color: rgba(0, 0, 0, 0.85);
+
+      &:focus {
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+      }
+    }
+
+    .btn-send {
+      width: 74px;
+      height: 32px;
+      float: right;
+      margin-right: 15px;
+      margin-top: 36px;
+      color: #fff;
+      border: none;
+      letter-spacing: 5px;
+      text-indent: 5px;
+      cursor: pointer;
+      outline: none;
+      -webkit-border-radius: 16px;
+      -moz-border-radius: 16px;
+      border-radius: 16px;
+
+      &.active {
+        background-image: linear-gradient(148deg, #65B7FE 0%, #4239FA 100%);
+      }
+
+      &.disabled {
+        background: rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+}
