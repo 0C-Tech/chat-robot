@@ -6,6 +6,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @NgModule({
   exports: [
@@ -59,7 +60,7 @@ import { NzResultModule } from 'ng-zorro-antd/result';
     // NzSkeletonModule,
     // NzSliderModule,
     // NzSpaceModule,
-    // NzSpinModule,
+    NzSpinModule
     // NzStatisticModule,
     // NzStepsModule,
     // NzSwitchModule,

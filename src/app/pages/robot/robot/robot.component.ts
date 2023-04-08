@@ -14,6 +14,7 @@ export class RobotComponent implements AfterViewInit {
   @ViewChild('promptInput') promptInput!: ElementRef;
   prompt = '';
   messages: ChatMessage[] = [];
+  loading = false;
 
   private inputFlag = false;
 
@@ -46,9 +47,11 @@ export class RobotComponent implements AfterViewInit {
     });
     this.prompt = '';
     this.scrollBottom();
+    this.loading = true;
 
     this.robotService.sendMessage(prompt).subscribe((res) => {
-      res.choices.forEach((msg) => {
+      this.loading = false;
+      (res.choices || []).forEach((msg) => {
         this.messages.push({
           isRobot: true,
           content: msg.message.content

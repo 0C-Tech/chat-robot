@@ -1,25 +1,27 @@
 <div class="robot-wrap">
   <div class="robot">
-    <div class="robot-message" #msgListEle>
-      <div class="robot-message-item"
-           *ngFor="let msg of messages"
-           [class.robot-message-item-robot]="msg.isRobot"
-           [class.robot-message-item-user]="!msg.isRobot">
-        <div class="robot-message-content">
-          <span *ngIf="msg.isRobot">
-            <span [innerHTML]="msg.content | safeHtml"></span>
-          </span>
-          <pre *ngIf="!msg.isRobot"><span>{{msg.content}}</span></pre>
+    <nz-spin [nzSpinning]="loading">
+      <div class="robot-message" #msgListEle>
+        <div class="robot-message-item"
+             *ngFor="let msg of messages"
+             [class.robot-message-item-robot]="msg.isRobot"
+             [class.robot-message-item-user]="!msg.isRobot">
+          <div class="robot-message-content">
+            <span *ngIf="msg.isRobot">
+              <span [innerHTML]="msg.content | safeHtml"></span>
+            </span>
+            <pre *ngIf="!msg.isRobot"><span>{{msg.content}}</span></pre>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="robot-prompt">
-      <textarea nz-input #promptInput
-                [(ngModel)]="prompt" (keydown)="onKeyDown($event)" placeholder="说点什么吧~"></textarea>
-      <button class="btn-send"
-              [class.active]="!!prompt.trim()"
-              [class.disabled]="!prompt.trim()"
-              (click)="sendPrompt()">发送</button>
-    </div>
+      <div class="robot-prompt">
+        <textarea nz-input #promptInput
+                  [(ngModel)]="prompt" (keydown)="onKeyDown($event)" placeholder="说点什么吧~"></textarea>
+        <button class="btn-send"
+                [class.active]="!!prompt.trim()"
+                [class.disabled]="!prompt.trim()"
+                (click)="sendPrompt()">发送</button>
+      </div>
+    </nz-spin>
   </div>
 </div>
