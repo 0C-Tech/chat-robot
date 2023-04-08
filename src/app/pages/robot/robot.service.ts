@@ -15,6 +15,6 @@ export class RobotService {
       .httpPost(this.apiService.getApiUrl(ApiUrl.GET_MESSAGE), {
         message
       })
-      .pipe(map((res) => res?.data || {}));
+      .pipe(map((res) => <any>(res || {})));
   }
 }

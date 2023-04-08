@@ -14,10 +14,8 @@
       </div>
     </div>
     <div class="robot-prompt">
-      <label>
-        <textarea nz-input #promptInput
-                  [(ngModel)]="prompt" (keydown)="onKeyDown($event)" placeholder="说点什么吧~"></textarea>
-      </label>
+      <textarea nz-input #promptInput
+                [(ngModel)]="prompt" (keydown)="onKeyDown($event)" placeholder="说点什么吧~"></textarea>
       <button class="btn-send"
               [class.active]="!!prompt.trim()"
               [class.disabled]="!prompt.trim()"

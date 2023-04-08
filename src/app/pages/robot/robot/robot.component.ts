@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { textPosition } from '../../../helper/util';
 import { ChatMessage } from '../robot.interface';
@@ -9,7 +9,7 @@ import { RobotService } from '../robot.service';
   templateUrl: './robot.component.html',
   styleUrls: ['./robot.component.less']
 })
-export class RobotComponent implements OnInit, AfterViewInit {
+export class RobotComponent implements AfterViewInit {
   @ViewChild('msgListEle') msgListEle!: ElementRef;
   @ViewChild('promptInput') promptInput!: ElementRef;
   prompt = '';
@@ -21,10 +21,6 @@ export class RobotComponent implements OnInit, AfterViewInit {
     private robotService: RobotService,
     private message: NzMessageService
   ) {
-  }
-
-  ngOnInit() {
-
   }
 
   ngAfterViewInit() {

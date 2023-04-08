@@ -1,6 +1,7 @@
 @body-width: 1000px;
 @dialog-height: 575px;
 @msg-input-height: 95px;
+@dialog-margin: 16px;
 
 .robot-wrap {
   display: flex;
@@ -8,12 +9,12 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  min-height: @dialog-height;
+  min-height: @dialog-height + @dialog-margin * 2;
   background: url("https://img.alicdn.com/tfs/TB1AgLTdmf2gK0jSZFPXXXsopXa-3840-1920.jpg") center center/cover no-repeat fixed;
 }
 
 .robot {
-  width: @body-width;
+  margin: @dialog-margin;
   background: #fff;
   box-shadow: 0 0 10px 0 rgba(171, 171, 171, 0.50);
 
@@ -70,12 +71,14 @@
   }
 
   .robot-prompt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     height: @msg-input-height;
     border-top: 1px solid #e4e4e4;
 
     textarea {
       height: 100%;
-      width: @body-width - 100;
       border: none;
       resize: none;
       color: rgba(0, 0, 0, 0.85);
@@ -90,9 +93,7 @@
     .btn-send {
       width: 74px;
       height: 32px;
-      float: right;
-      margin-right: 15px;
-      margin-top: 36px;
+      margin: 0 16px;
       color: #fff;
       border: none;
       letter-spacing: 5px;
@@ -111,5 +112,17 @@
         background: rgba(0, 0, 0, 0.15);
       }
     }
+  }
+}
+
+@media (max-width: @body-width - 1) {
+  .robot {
+    width: 100%;
+  }
+}
+
+@media (min-width: @body-width) {
+  .robot {
+    width: @body-width;
   }
 }
