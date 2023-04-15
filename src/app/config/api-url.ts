@@ -1,4 +1,5 @@
 export enum ApiUrl {
   API_URL_PREFIX = '/api',
-  GET_MESSAGE = '/sendMsg'
+  SEND_MESSAGE = '/sendMsg',
+  SEND_MESSAGE_WITH_HISTORY = '/sendMsgWithHistory'
 }

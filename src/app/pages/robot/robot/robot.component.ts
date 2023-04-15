@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { textPosition } from '../../../helper/util';
-import { ChatMessage } from '../robot.interface';
+import { ChatGPTResponse, ChatMessage } from '../robot.interface';
 import { RobotService } from '../robot.service';
 
 @Component({
@@ -33,7 +33,7 @@ export class RobotComponent implements AfterViewInit {
     }, false);
   }
 
-  sendPrompt() {
+  sendMessage(withHistory = true) {
     const prompt = this.prompt.trim();
     if (!prompt) {
       this.message.warning('请输入内容。');
@@ -49,16 +49,29 @@ export class RobotComponent implements AfterViewInit {
     this.scrollBottom();
     this.loading = true;
 
-    this.robotService.sendMessage(prompt).subscribe((res) => {
+    const resHandler = (res: ChatGPTResponse) => {
       this.loading = false;
       (res.choices || []).forEach((msg) => {
         this.messages.push({
           isRobot: true,
-          content: msg.message.content
+          content: msg.message.content.replace(/\r\n|\r|\n/gi, '<br/>')
         });
       });
       this.scrollBottom();
-    });
+    };
+
+    if (!withHistory) {
+      this.robotService.sendMessage(prompt).subscribe(resHandler);
+    } else {
+      const messages: ChatMessage[] = this.messages.slice(-10).map((item) => ({
+        content: item.content,
+        role: item.isRobot ? 'assistant' : 'user'
+      }));
+      this.robotService.sendMessageWithHistory({
+        messages,
+        model: 'gpt-3.5-turbo'
+      }).subscribe(resHandler);
+    }
   }
 
   onKeyDown(e: KeyboardEvent) {
@@ -69,7 +82,7 @@ export class RobotComponent implements AfterViewInit {
       if (!isCtrlPressed) {
         e.preventDefault();
         if (!this.inputFlag) {
-          this.sendPrompt();
+          this.sendMessage();
         }
       } else {
         if (!isShiftPressed) {

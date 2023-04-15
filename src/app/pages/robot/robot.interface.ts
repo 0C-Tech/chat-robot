@@ -1,6 +1,12 @@
 export interface ChatMessage {
-  isRobot: boolean;
   content: string;
+  isRobot?: boolean;
+  role?: 'user' | 'assistant'
+}
+
+export interface ChatGPTParam {
+  messages: ChatMessage[];
+  model: 'gpt-3.5-turbo'
 }
 
 export interface ChatGPTResponse {
